@@ -51,10 +51,11 @@ def get_loyal_profiles():
 
 def get_last_sold_products():
     order = Order.objects.order_by('-creation_date').first()  # prefetch_related
-    products = ', '.join(order.products.all().order_by('name').values_list('name', flat=True))
-
-    if order is None or not products:  # Check here
+   
+    if order is None or not products:  
         return ''
+        
+     products = ', '.join(order.products.all().order_by('name').values_list('name', flat=True))
 
     return f"Last sold products: {products}"
 
